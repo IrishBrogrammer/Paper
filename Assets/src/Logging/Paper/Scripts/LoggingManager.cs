@@ -18,6 +18,11 @@ public static class LoggingManager
 	{
 		UnityEngine.Debug.Log( " Brian getting called " + logString  );
 	}
+	
+	public static HashStore<LogChannel> GetActiveChannels()
+	{
+		return activeChannels.GetStore();
+	}
 
 	public static void SetConfig(LogConfiguration config)
 	{

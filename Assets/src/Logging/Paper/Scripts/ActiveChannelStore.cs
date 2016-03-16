@@ -6,6 +6,11 @@ public class ActiveChannelStore
 {
 	private HashStore<LogChannel> store = new HashStore<LogChannel>();
 
+	public HashStore<LogChannel> GetStore()
+	{
+		return store;
+	}
+
 	public void AddChannel(LogChannel channel)
 	{
 		store.Add( channel );

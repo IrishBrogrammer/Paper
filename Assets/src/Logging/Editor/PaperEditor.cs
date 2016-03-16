@@ -41,8 +41,6 @@ public class PaperEditor : EditorWindow
 		window.position = new Rect(200, 200, 400, 300);
 	}
 
-
-
 	void OnEnable()
 	{
 		if (editorstore == null)
@@ -93,7 +91,7 @@ public class PaperEditor : EditorWindow
 		foreach (var log in editorstore.Logs)
 			OutputMessage(log);
 
-	//	currentGUI.DrawGUI( editorstore );
+		currentGUI.DrawGUI( editorstore );
 	}
 
 	private void OutputMessage( LogInfo log)

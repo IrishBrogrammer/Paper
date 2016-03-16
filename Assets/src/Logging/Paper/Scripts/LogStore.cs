@@ -54,7 +54,6 @@ public class EditorLogStore : ScriptableObject
 
 		if (editorDebug == null)
 		{
-			Debug.Log(" couldnt find log store in scene ");
 			editorDebug = ScriptableObject.CreateInstance<EditorLogStore>();
 		}
 		return editorDebug;	

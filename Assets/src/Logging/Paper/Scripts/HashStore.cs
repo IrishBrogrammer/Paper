@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -34,6 +35,11 @@ public class HashStore<T>
 	public void Clear()
 	{
 		store.Clear();
+	}
+
+	public List<T> GetAll()
+	{
+		return store.Keys.ToList<T>();
 	}
 
 }
