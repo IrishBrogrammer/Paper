@@ -3,10 +3,13 @@ using System.Collections;
 
 public class PaperActionBar 
 {
-	public void DrawActionBar()
+	public void DrawActionBar( EditorLogStore store )
 	{
 		GUILayout.BeginHorizontal();
 
+		DrawCounter( " Logs ", store.LogCount );
+		DrawCounter( " Warnings ", store.WarningCount );
+		DrawCounter(" Errors ", store.ErrorCount );
 		DrawButton("\u0066 Clear", OnClear);
 		DrawToggle("ClearOnPlay", OnClearOnPlay);
 
@@ -30,6 +33,11 @@ public class PaperActionBar
 			onPress();
 		}
 		
+	}
+
+	public void DrawCounter(string label, int count)
+	{
+		GUILayout.Label( label + " : " + count.ToString() );
 	}
 
 

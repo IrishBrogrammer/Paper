@@ -44,16 +44,10 @@ public class PaperEditor : EditorWindow
 	void OnEnable()
 	{
 		if (editorstore == null)
-		{
 			editorstore = EditorLogStore.Create();
-		}
-
+	
 		if (LogStore.GetLogStore() == null)
-		{
-			Debug.Log(" Editor store has gone null; ");
-			Debug.Log(" Setting store with " + editorstore.Logs.Count);
 			LogStore.SetStore(editorstore);
-		}
 	}
 
 	void OnInspectorUpdate()
@@ -63,7 +57,7 @@ public class PaperEditor : EditorWindow
 
 	void OnGUI()
 	{
-		actionBar.DrawActionBar();
+		actionBar.DrawActionBar( editorstore );
 		DrawTabs();
 		DrawMain();
 	}
@@ -71,10 +65,10 @@ public class PaperEditor : EditorWindow
 	void DrawTabs()
 	{	
 		GUILayout.BeginHorizontal();
+		
 		foreach( EditorTab tab in System.Enum.GetValues( typeof( EditorTab ) ) )
-		{
 			DrawTab( tab );	
-		}	
+		
 		GUILayout.EndHorizontal();
 	}
 
@@ -87,10 +81,6 @@ public class PaperEditor : EditorWindow
 	void DrawMain()
 	{
 		IPaperGUI currentGUI = tabGGUI[currentTab];
-
-		foreach (var log in editorstore.Logs)
-			OutputMessage(log);
-
 		currentGUI.DrawGUI( editorstore );
 	}
 
@@ -99,7 +89,6 @@ public class PaperEditor : EditorWindow
 		GUILayout.BeginHorizontal();
 
 		GUILayout.Label(log.LogChannel.ToString());
-
 		GUILayout.Box(log.Message);
 
 		GUILayout.EndHorizontal();

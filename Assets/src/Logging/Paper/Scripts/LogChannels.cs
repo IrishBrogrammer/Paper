@@ -4,5 +4,7 @@ using System.Collections;
 public enum LogChannel
 { 
 	AssetDatabase,
-	UI
+	UI,
+	Core,
+	BuildChecks
 }
