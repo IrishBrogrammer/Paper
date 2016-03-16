@@ -5,12 +5,10 @@ using System.Collections.Generic;
 // Class to store logs
 public static class LogStore 
 {
-	public static List<string> log = new List<string>();
 	public static EditorLogStore store;
 
 	public static void SetStore(EditorLogStore editorStore)
 	{
-		Debug.Log(" Setting store with log count of " + editorStore.Logs.Count);
 		store = editorStore;
 	}
 
@@ -30,11 +28,6 @@ public static class LogStore
 			store.AddLog( log );
 	}
 
-	public static int GetLogCount()
-	{
-		return log.Count;
-	}
-
 	public static void ClearStore()
 	{
 		store.ClearLogs();
@@ -47,6 +40,9 @@ public static class LogStore
 public class EditorLogStore : ScriptableObject
 {
 	public List<LogInfo> Logs = new List<LogInfo>();
+	public int LogCount = 0;
+	public int WarningCount = 0;
+	public int ErrorCount = 0;
 
 	static public EditorLogStore Create()
 	{
@@ -64,16 +60,40 @@ public class EditorLogStore : ScriptableObject
 		hideFlags = HideFlags.HideAndDontSave;
 	}
 
-	public void AddLog(LogInfo message)
+	public void AddLog( LogInfo message )
 	{
-		Logs.Add(message);
+		UpdateCount( message.LogLevel );
+		Logs.Add( message );
 	}
 
 	public void ClearLogs()
 	{
-
+		ResetCounts();
 		Logs.Clear();
 	}
+	
+	private void UpdateCount( LogLevel level )
+	{
+		switch (level)
+		{
+			case ( LogLevel.Log ):
+				LogCount++;
+				break;
 
+			case ( LogLevel.Warning ):
+				WarningCount++;
+				break;
 
+			case ( LogLevel.Error ):
+				ErrorCount++;
+				break;
+		}
+	}
+
+	private void ResetCounts()
+	{
+		LogCount = 0;
+		WarningCount = 0;
+		ErrorCount = 0;
+	}
 }
