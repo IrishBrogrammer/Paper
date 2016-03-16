@@ -41,13 +41,9 @@ public static class LoggingManager
 		activeChannels.RemoveChannel(channel);
 	}
 
-	// Log message if channel is active 
 	public static void Log( LogChannel logChannel, string message)
 	{
-		if (activeChannels.Contains( logChannel ) )
-		{
-			logWritter.LogMessage( logChannel , message );
-		}
+		logWritter.LogMessage( logChannel , message );
 	}
 
 	public static void LogIf(bool shouldLog, LogChannel logChannel, string message)
@@ -64,18 +60,12 @@ public static class LoggingManager
 
 	public static void LogWarning(LogChannel logChannel, string message)
 	{
-		if (activeChannels.Contains(logChannel))
-		{
-			logWritter.LogWarning( logChannel , message);
-		}
+		logWritter.LogWarning( logChannel , message);
 	}
 	
 	public static void LogError( LogChannel logChannel , string message )
  	{
-		if ( activeChannels.Contains( logChannel ) )
-		{
-			logWritter.LogError( logChannel , message );
-		}
+		logWritter.LogError( logChannel , message );
 	}
 
 }
