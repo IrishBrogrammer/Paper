@@ -1,28 +1,36 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 
 public class PaperActionBar 
 {
+	bool showLogs = false;
+	bool showWarnings = false;
+	bool showErrors = false;
+	bool clearOnPlay = false;
+
 	public void DrawActionBar( EditorLogStore store )
 	{
 		GUILayout.BeginHorizontal();
 
-		DrawCounter( " Logs ", store.LogCount );
-		DrawCounter( " Warnings ", store.WarningCount );
-		DrawCounter(" Errors ", store.ErrorCount );
-		DrawButton("\u0066 Clear", OnClear);
-		DrawToggle("ClearOnPlay", OnClearOnPlay);
+		showLogs = DrawToggle(showLogs, " Logs " + " : " + store.LogCount, EditorStyles.toolbarButton);
+		showWarnings = DrawToggle(showWarnings, " Warnings " + " : " + store.WarningCount, EditorStyles.toolbarButton);
+		showErrors = DrawToggle(showErrors, " Errors " + " : " + store.ErrorCount, EditorStyles.toolbarButton);
+		DrawButton(" Clear", OnClear);
+		clearOnPlay = DrawToggle(clearOnPlay, " Clear on play ", EditorStyles.toolbarButton);
+
+		
+		//DrawToggle("ClearOnPlay", OnClearOnPlay);
 
 		GUILayout.EndHorizontal();
 	}
 
 	public void DrawButton(string buttonName, System.Action onPress)
 	{ 
-		if ( GUILayout.Button( buttonName ) )
+		if ( GUILayout.Button( buttonName , EditorStyles.toolbarButton ) )
 			onPress();
 	}
 
-	bool clearOnPlay = false;
 	public void DrawToggle(string buttonName, System.Action onPress)
 	{
 		if (GUILayout.Toggle( clearOnPlay , buttonName))
@@ -35,9 +43,9 @@ public class PaperActionBar
 		
 	}
 
-	public void DrawCounter(string label, int count)
+	public bool DrawToggle( bool active , string label , GUIStyle style )
 	{
-		GUILayout.Label( label + " : " + count.ToString() );
+		return GUILayout.Toggle(active, label  , style);
 	}
 
 
