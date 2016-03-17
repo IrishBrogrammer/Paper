@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,7 +23,9 @@ public static class LogStore
 		var log = new LogInfo(
 			channel,
 			message,
-			level );
+			GetCallStack(),
+			level
+			);
 
 		if (store != null)
 			store.AddLog( log );
@@ -33,6 +36,23 @@ public static class LogStore
 		store.ClearLogs();
 	}
 
+
+	static List<LogStackFrame> GetCallStack()
+	{
+		List<LogStackFrame> callStack = new List<LogStackFrame>();
+
+		StackTrace stackTrace = new StackTrace(true);
+		StackFrame[] stackFrames = stackTrace.GetFrames();
+
+		foreach (StackFrame frame in stackFrames)
+		{
+			LogStackFrame logFrame = new LogStackFrame(frame);
+			callStack.Add(logFrame);
+		}
+
+
+		return callStack;
+	}
 }
 
 

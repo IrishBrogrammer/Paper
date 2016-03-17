@@ -4,5 +4,7 @@ using System.Collections;
 public interface IPaperGUI 
 {
 	void DrawGUI( EditorLogStore logStore );
+	
+	void OnClear();
 
 }

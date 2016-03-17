@@ -20,8 +20,9 @@ public class Test : MonoBehaviour {
 
 	void Update()
 	{
-		if( Input.GetKeyDown( KeyCode.T ) )
-			LoggingManager.Log( LogChannel.UI, " Button PRess" );
+		if (Input.GetKeyDown(KeyCode.T))
+			LogMessage(" Button Press ");
+
 
 		if( Input.GetKeyDown( KeyCode.U ) )
 			LoggingManager.Log( LogChannel.AssetDatabase, "PRessed U " );
@@ -33,5 +34,11 @@ public class Test : MonoBehaviour {
 			LoggingManager.LogError( LogChannel.Core, " Loader is null " );
 	}
 
-
+	private void LogMessage(string message)
+	{
+		LoggingManager.Log(LogChannel.UI, message);
+		Debug.Log(message);
+	
+	
+	}
 }
