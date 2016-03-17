@@ -10,7 +10,7 @@ public class FilterGUI : IPaperGUI
 	public void DrawGUI( EditorLogStore store )
 	{
 		var activeChannels = LoggingManager.GetActiveChannels();
-
+		
 		List<LogChannel> disabledChannesl = new List<LogChannel>();
 
 		foreach( LogChannel channel in System.Enum.GetValues( typeof( LogChannel)  ) )
@@ -19,10 +19,10 @@ public class FilterGUI : IPaperGUI
 				disabledChannesl.Add( channel );
 		}
 
-		DrawListOfChannels( System.Enum.GetValues( typeof( LogChannel ) ) , null );
+		DrawListOfChannels( activeChannels.GetAll() , null);
 	}
 
-	private void DrawListOfChannels(Array channels , System.Action onPress )
+	private void DrawListOfChannels( List<LogChannel> channels , System.Action onPress )
 	{
 		foreach (var channel in channels)
 		{

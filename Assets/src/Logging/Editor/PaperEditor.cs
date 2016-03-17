@@ -84,15 +84,4 @@ public class PaperEditor : EditorWindow
 		currentGUI.DrawGUI( editorstore );
 	}
 
-	private void OutputMessage( LogInfo log)
-	{
-		GUILayout.BeginHorizontal();
-		GUILayout.Label(log.LogChannel.ToString());
-		GUILayout.Box(log.Message);
-
-		GUILayout.EndHorizontal();
-	
-	}
-
-
 }
