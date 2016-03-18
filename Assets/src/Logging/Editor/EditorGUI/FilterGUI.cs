@@ -19,7 +19,16 @@ public class FilterGUI : IPaperGUI
 				disabledChannesl.Add( channel );
 		}
 
+		GUILayout.BeginHorizontal();
+		GUILayout.Label(" Active Channels ");
+		GUILayout.EndHorizontal();
 		DrawListOfChannels( activeChannels.GetAll() , null);
+
+
+		GUILayout.BeginHorizontal();
+		GUILayout.Label(" Deactive Channels ");
+		GUILayout.EndHorizontal();
+		DrawListOfChannels(disabledChannesl, null);
 	}
 
 	private void DrawListOfChannels( List<LogChannel> channels , System.Action onPress )
