@@ -90,10 +90,9 @@ public class PaperEditor : EditorWindow
 
 	void DrawMain()
 	{
+		return;
 		IPaperGUI currentGUI = tabGGUI[currentTab];
-
-		var filteredLogs = LogFilter.FilterLogs(editorstore.Logs, filteringConfig);
-		currentGUI.DrawGUI( filteredLogs , filteringConfig );
+		currentGUI.DrawGUI( editorstore.Logs , filteringConfig );
 	}
 
 }
