@@ -4,18 +4,16 @@ using System.Collections;
 
 public class PaperActionBar 
 {
-	bool showLogs = false;
-	bool showWarnings = false;
-	bool showErrors = false;
+
 	bool clearOnPlay = false;
 
-	public void DrawActionBar( EditorLogStore store )
+	public void DrawActionBar( EditorLogStore store , ref FilterConfig filterConfig  )
 	{
 		GUILayout.BeginHorizontal();
 
-		showLogs = DrawToggle(showLogs, " Logs " + " : " + store.LogCount, EditorStyles.toolbarButton);
-		showWarnings = DrawToggle(showWarnings, " Warnings " + " : " + store.WarningCount, EditorStyles.toolbarButton);
-		showErrors = DrawToggle(showErrors, " Errors " + " : " + store.ErrorCount, EditorStyles.toolbarButton);
+		filterConfig.LogsActive = DrawToggle(filterConfig.LogsActive, " Logs " + " : " + store.LogCount, EditorStyles.toolbarButton);
+		filterConfig.WarningsActive = DrawToggle(filterConfig.WarningsActive , " Warnings " + " : " + store.WarningCount, EditorStyles.toolbarButton);
+		filterConfig.ErrorsActive = DrawToggle(filterConfig.ErrorsActive, " Errors " + " : " + store.ErrorCount, EditorStyles.toolbarButton);
 		DrawButton(" Clear", OnClear);
 		clearOnPlay = DrawToggle(clearOnPlay, " Clear on play ", EditorStyles.toolbarButton);
 
@@ -35,9 +33,7 @@ public class PaperActionBar
 	{
 		if (GUILayout.Toggle( clearOnPlay , buttonName))
 		{
-			Debug.Log(" Clear on play " + clearOnPlay);
 			clearOnPlay = !clearOnPlay;
-			Debug.Log(" Clear on play changes " + clearOnPlay);
 			onPress();
 		}
 		

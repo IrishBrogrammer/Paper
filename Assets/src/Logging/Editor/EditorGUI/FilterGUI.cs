@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class FilterGUI : IPaperGUI
 {
 
-	public void DrawGUI( EditorLogStore store )
+	public void DrawGUI( List<LogInfo> store  )
 	{
 		var activeChannels = LoggingManager.GetActiveChannels();
 		

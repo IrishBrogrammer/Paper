@@ -10,9 +10,9 @@ public class LogGUI : IPaperGUI
 
 	private LogInfo selectedLog = null;
 
-	public void DrawGUI( EditorLogStore  store )
+	public void DrawGUI( List<LogInfo>  store )
 	{
-		var logs = store.Logs;
+		var logs = store;
 
 		scrollViewPos = GUILayout.BeginScrollView( scrollViewPos );
 

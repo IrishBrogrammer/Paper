@@ -10,23 +10,24 @@ public class PaperEditor : EditorWindow
 		Filter
 	}
 
+	IPaperGUI currentGUI = new FilterGUI();
+	
 	private Dictionary<EditorTab, IPaperGUI> tabGGUI = new Dictionary<EditorTab, IPaperGUI>()
 	{
 		{ EditorTab.Filter , new FilterGUI() },
 		{ EditorTab.Console , new LogGUI() } 
 	};
+
 	EditorTab currentTab = EditorTab.Console;
 
 	private static PaperActionBar actionBar = new PaperActionBar();
+	private static FilterConfig filteringConfig = new FilterConfig();
 
 	private static bool clearOnPlay = false;
 
 	[UnityEngine.SerializeField]
 	private static EditorLogStore editorstore;
 
-	private Vector2 ScrollPos;
-
-	IPaperGUI currentGUI = new FilterGUI();
 
 	[MenuItem("Paper/Show Console")]
 	public static void ShowWindow()
@@ -57,7 +58,7 @@ public class PaperEditor : EditorWindow
 
 	void OnGUI()
 	{
-		actionBar.DrawActionBar( editorstore );
+		actionBar.DrawActionBar( editorstore , ref filteringConfig );
 		DrawTabs();
 		DrawMain();
 	}
@@ -81,7 +82,9 @@ public class PaperEditor : EditorWindow
 	void DrawMain()
 	{
 		IPaperGUI currentGUI = tabGGUI[currentTab];
-		currentGUI.DrawGUI( editorstore );
+
+		var filteredLogs = LogFilter.FilterLogs(editorstore.Logs, filteringConfig);
+		currentGUI.DrawGUI( filteredLogs );
 	}
 
 }
