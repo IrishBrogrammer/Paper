@@ -9,5 +9,5 @@ public class FilterConfig
 	public bool WarningsActive = true;
 	public bool ErrorsActive = true;
 
-	public List<LogChannel> FilterChannels = new List<LogChannel>();
+	public HashStore<LogChannel> ActiveChannels;
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public interface IPaperGUI 
 {
-	void DrawGUI( List<LogInfo> logStore );
+	void DrawGUI( List<LogInfo> logStore , FilterConfig config  );
 	
 	void OnClear();
 

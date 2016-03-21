@@ -10,6 +10,7 @@ public static class LogFilter
 	{
 		IEnumerable<LogInfo> filteredLogs = logs;
 
+		// Filter logs based off serverity 
 		if (config.LogsActive == false)
 			filteredLogs =filteredLogs.Where( log => log.LogLevel != LogLevel.Log);
 

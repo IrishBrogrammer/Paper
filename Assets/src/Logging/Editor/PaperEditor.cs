@@ -14,14 +14,14 @@ public class PaperEditor : EditorWindow
 	
 	private Dictionary<EditorTab, IPaperGUI> tabGGUI = new Dictionary<EditorTab, IPaperGUI>()
 	{
-		{ EditorTab.Filter , new FilterGUI() },
+		{ EditorTab.Filter , new FilterGUI( UpdateFilterConfig ) },
 		{ EditorTab.Console , new LogGUI() } 
 	};
 
 	EditorTab currentTab = EditorTab.Console;
 
 	private static PaperActionBar actionBar = new PaperActionBar();
-	private static FilterConfig filteringConfig = new FilterConfig();
+	private  static FilterConfig filteringConfig = new FilterConfig();
 
 	private static bool clearOnPlay = false;
 
@@ -56,6 +56,15 @@ public class PaperEditor : EditorWindow
 		Repaint();
 	}
 
+	static void UpdateFilterConfig(LogChannel channel, bool active)
+	{
+		if (active)
+			filteringConfig.ActiveChannels.Add(channel);
+		else
+			filteringConfig.ActiveChannels.Remove(channel);
+	}
+
+
 	void OnGUI()
 	{
 		actionBar.DrawActionBar( editorstore , ref filteringConfig );
@@ -84,7 +93,7 @@ public class PaperEditor : EditorWindow
 		IPaperGUI currentGUI = tabGGUI[currentTab];
 
 		var filteredLogs = LogFilter.FilterLogs(editorstore.Logs, filteringConfig);
-		currentGUI.DrawGUI( filteredLogs );
+		currentGUI.DrawGUI( filteredLogs , filteringConfig );
 	}
 
 }

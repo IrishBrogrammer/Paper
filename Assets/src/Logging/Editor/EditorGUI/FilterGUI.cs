@@ -6,10 +6,20 @@ using System.Collections.Generic;
 
 public class FilterGUI : IPaperGUI
 {
+	private System.Action<LogChannel, bool> onFilterChannel;
 
-	public void DrawGUI( List<LogInfo> store  )
+	public FilterGUI()
+	{ 
+	}
+
+	public FilterGUI(System.Action<LogChannel, bool> filter)
 	{
-		var activeChannels = LoggingManager.GetActiveChannels();
+		onFilterChannel = filter;
+	}
+
+	public void DrawGUI( List<LogInfo> store , FilterConfig config  )
+	{
+		var activeChannels = config.ActiveChannels;
 		
 		List<LogChannel> disabledChannesl = new List<LogChannel>();
 
@@ -22,23 +32,23 @@ public class FilterGUI : IPaperGUI
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(" Active Channels ");
 		GUILayout.EndHorizontal();
-		DrawListOfChannels( activeChannels.GetAll() , null);
+		DrawListOfChannels( activeChannels.GetAll() , true);
 
 
 		GUILayout.BeginHorizontal();
 		GUILayout.Label(" Deactive Channels ");
 		GUILayout.EndHorizontal();
-		DrawListOfChannels(disabledChannesl, null);
+		DrawListOfChannels(disabledChannesl, false );
 	}
 
-	private void DrawListOfChannels( List<LogChannel> channels , System.Action onPress )
+	private void DrawListOfChannels( List<LogChannel> channels , bool active  )
 	{
 		foreach (var channel in channels)
 		{
 			GUILayout.BeginHorizontal();
 
-			if ( GUILayout.Button( channel.ToString() ) )
-				onPress();
+			if (GUILayout.Button(channel.ToString()))
+				onFilterChannel(channel, !active);
 
 			GUILayout.EndHorizontal();
 		}
