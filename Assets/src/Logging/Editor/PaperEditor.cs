@@ -90,7 +90,6 @@ public class PaperEditor : EditorWindow
 
 	void DrawMain()
 	{
-		return;
 		IPaperGUI currentGUI = tabGGUI[currentTab];
 		currentGUI.DrawGUI( editorstore.Logs , filteringConfig );
 	}

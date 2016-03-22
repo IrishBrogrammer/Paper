@@ -29,20 +29,16 @@ public class FilterGUI : IPaperGUI
 				disabledChannesl.Add( channel );
 		}
 
-		GUILayout.BeginHorizontal();
-		GUILayout.Label(" Active Channels ");
-		GUILayout.EndHorizontal();
-		DrawListOfChannels( activeChannels.GetAll() , true);
-
-
-		GUILayout.BeginHorizontal();
-		GUILayout.Label(" Deactive Channels ");
-		GUILayout.EndHorizontal();
-		DrawListOfChannels(disabledChannesl, false );
+		DrawListOfChannels(  "Active " , activeChannels.GetAll() , true);
+		DrawListOfChannels( " Not Active " , disabledChannesl, false );
 	}
 
-	private void DrawListOfChannels( List<LogChannel> channels , bool active  )
+	private void DrawListOfChannels( string title ,  List<LogChannel> channels , bool active  )
 	{
+		GUILayout.BeginVertical();
+		
+		GUILayout.Label(title);
+
 		foreach (var channel in channels)
 		{
 			GUILayout.BeginHorizontal();
@@ -52,6 +48,7 @@ public class FilterGUI : IPaperGUI
 
 			GUILayout.EndHorizontal();
 		}
+		GUILayout.EndVertical();
 	}
 
 	public void OnClear()
