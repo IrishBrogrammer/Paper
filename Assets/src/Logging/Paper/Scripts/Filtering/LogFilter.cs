@@ -20,6 +20,10 @@ public static class LogFilter
 		if (config.ErrorsActive == false)
 			filteredLogs = filteredLogs.Where(log => log.LogLevel != LogLevel.Error);
 
+
+		// Filter remaining messages based off the currently active channesl 
+		filteredLogs = filteredLogs.Where(log => config.ActiveChannels.Contains(log.LogChannel));
+
 		return filteredLogs.ToList();
 	}
 	
