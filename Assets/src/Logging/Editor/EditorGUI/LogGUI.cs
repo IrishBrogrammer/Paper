@@ -33,11 +33,7 @@ public class LogGUI : IPaperGUI
 	{
 		GUILayout.BeginHorizontal();
 
-		GUIStyle testStyle = EditorStyles.label;
-
 		string displayText = log.LogChannel.ToString() + " : " + log.Message;
-
-		var displayStyle = EditorStyles.label;
 		GUILayout.EndHorizontal();
 	
 		if (GUILayout.Button(displayText, EditorStyles.label))

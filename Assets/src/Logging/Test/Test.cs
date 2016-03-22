@@ -6,7 +6,6 @@ public class Test : MonoBehaviour {
 	// Use this for initialization
 	public TextAsset testConfiguration;
 
-
 	void Awake()
 	{
 		var test = fastJSON.JSON.ToObject<LogConfiguration>( testConfiguration.text );
@@ -22,7 +21,6 @@ public class Test : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.T))
 			LogMessage(" Button Press ");
-
 
 		if( Input.GetKeyDown( KeyCode.U ) )
 			LoggingManager.Log( LogChannel.AssetDatabase, "PRessed U " );

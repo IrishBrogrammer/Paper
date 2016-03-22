@@ -10,8 +10,7 @@ public class PaperEditor : EditorWindow
 		Filter
 	}
 
-	IPaperGUI currentGUI = new FilterGUI();
-	
+
 	private Dictionary<EditorTab, IPaperGUI> tabGGUI = new Dictionary<EditorTab, IPaperGUI>()
 	{
 		{ EditorTab.Filter , new FilterGUI( UpdateFilterConfig ) },
@@ -23,7 +22,6 @@ public class PaperEditor : EditorWindow
 	private static PaperActionBar actionBar = new PaperActionBar();
 	private  static FilterConfig filteringConfig = new FilterConfig();
 
-	private static bool clearOnPlay = false;
 
 	[UnityEngine.SerializeField]
 	private static EditorLogStore editorstore;
