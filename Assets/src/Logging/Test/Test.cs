@@ -37,8 +37,5 @@ public class Test : MonoBehaviour {
 	private void LogMessage(string message)
 	{
 		LoggingManager.Log(LogChannel.UI, message);
-		Debug.Log(message);
-	
-	
 	}
 }
