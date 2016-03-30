@@ -36,10 +36,8 @@ public class LogGUI : IPaperGUI
 		string displayText = log.LogChannel.ToString() + " : " + log.Message;
 		GUILayout.EndHorizontal();
 	
-		if (GUILayout.Button(displayText, EditorStyles.label))
+		if (GUILayout.Button(displayText, EditorStyles.whiteLabel))
 			selectedLog = log;
-
-	
 	}
 
 	private void DrawDetailedLog(LogInfo log)
