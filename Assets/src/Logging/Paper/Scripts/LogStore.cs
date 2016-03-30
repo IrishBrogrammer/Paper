@@ -18,6 +18,7 @@ public static class LogStore
 		return store;
 	}
 
+	[StackTraceIgnore]
 	public static void AddLog( LogChannel channel ,  string message , LogLevel level )
 	{
 		var log = new LogInfo(
@@ -36,7 +37,7 @@ public static class LogStore
 		store.ClearLogs();
 	}
 
-
+	[StackTraceIgnore]
 	static List<LogStackFrame> GetCallStack()
 	{
 		List<LogStackFrame> callStack = new List<LogStackFrame>();
@@ -46,6 +47,11 @@ public static class LogStore
 
 		foreach (StackFrame frame in stackFrames)
 		{
+			var method = frame.GetMethod();
+
+			if (method.IsDefined(typeof(StackTraceIgnore), true))
+				continue;
+
 			LogStackFrame logFrame = new LogStackFrame(frame);
 			callStack.Add(logFrame);
 		}

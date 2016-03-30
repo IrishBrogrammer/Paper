@@ -41,28 +41,35 @@ public static class LoggingManager
 		activeChannels.RemoveChannel(channel);
 	}
 
+
+	[StackTraceIgnore]
 	public static void Log( LogChannel logChannel, string message)
 	{
 		logWritter.LogMessage( logChannel , message );
 	}
 
+	[StackTraceIgnore]
 	public static void LogIf(bool shouldLog, LogChannel logChannel, string message)
 	{
 		if ( shouldLog )
 			Log( logChannel, message );
 	}
 
+	[StackTraceIgnore]
 	public static void LogIf(Func<bool> testMethod, LogChannel logChannel, string message)
 	{
 		if ( testMethod() )
 			Log( logChannel , message );
 	}
 
+	[StackTraceIgnore]
 	public static void LogWarning(LogChannel logChannel, string message)
 	{
 		logWritter.LogWarning( logChannel , message);
 	}
-	
+
+
+	[StackTraceIgnore]
 	public static void LogError( LogChannel logChannel , string message )
  	{
 		logWritter.LogError( logChannel , message );

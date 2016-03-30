@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
+using System;
 using System.Diagnostics;
 using System.Collections;
+
+
+[AttributeUsage(AttributeTargets.Method)]
+public class StackTraceIgnore : Attribute {}
 
 public class LogStackFrame 
 {
