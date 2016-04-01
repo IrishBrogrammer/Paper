@@ -21,6 +21,13 @@ LoggingManager.Log( LogChannel.AssetDatabase , " Log this message " );
 * Create log groups to better break down your log types
 
 
+# Features to still be implemented
+
+* Loading of configuration file to determine active channels
+
+* Regex search of logs
+
+* Customisable log output( change text size,font and colour )
 
 
 
